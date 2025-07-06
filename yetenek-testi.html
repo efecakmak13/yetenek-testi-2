@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yeteneklerini Test Edelim 🔍</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-size: 5vw;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  #message {
+    padding: 1rem;
+    font-size: 6vw;
+  }
+  #feedback {
+    margin-top: 1rem;
+    font-size: 4vw;
+    color: yellow;
+  }
+  #average {
+    font-size: 3.5vw;
+    margin-top: 0.5rem;
+  }
+  #screamer {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: flash 0.2s infinite alternate;
+  }
+  @keyframes flash {
+    0% { background-color: black; }
+    100% { background-color: darkred; }
+  }
+  #screamer img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+  #screamer p {
+    position: absolute;
+    color: white;
+    font-size: 6vw;
+    bottom: 20px;
+    text-shadow: 2px 2px 5px black;
+  }
+</style>
+</head>
+<body>
+  <div id="message">Yeteneklerini test edelim! Tıkla bakalım...</div>
+  <div id="feedback"></div>
+  <div id="average"></div>
+
+  <div id="screamer">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAD6y1erAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AwEEDUqflHbMwAAIABJREFUeNrt3Xl8XleZgPHvTvZh7dMY29mzFtmWLTy1pq7TRAYJD+XoAdqgAEmip//bPRZP2gS89pAihUoQ0A7aW9kGAhRUgPZgQQWGAidMMGE8QYuBDzGDCgV7GowQ4cJq7Pv9fV/zjvDOzFz3P9eOvtVbuzLcVez/FqO78ctFEs+V5fwHBoF+AR/4wPyIQ7X5Jkg+eO1y+bPy1/aTFXMHGGV/LzZHdv3xN6a0Nr8mx8bdWz+v9kBdrPqpF0R4k7vq0V+yTt/U+Ghd38+eHb1W3sVgPU9WXPvdnp9nt7BWv+KJbo7rW1kD69rZFP3dQlf4U9sxveUmNmvMb/7aPa9r15RIt33lXZPwtiu1+TX7+G59eSxw7ds5LjfW54Gv63qzmN5cKJqyxkEuXD6bpPs/vvSfoG4rLD5H06vquNtFZr/3j9rvcz21SlyD0M22YZwqUPXn+nMn+4cr63v+Q0l/p6uG5TYvH2FGMW9Cu/RL1xZvLYeHcLxnlqpMq2Rkfq6g6bHL26tnwxMf7xlbE4deRKUv6+mn6Um08LpfZfYrZrJKzslB6efatFm8/1qtP6jQvJWemTdZTZtuK9Uxfebq3/Os3vZrJnE9/6Xi7os+TRqk8FjzMT/XXe6nS+aeXXx87uS9PTvWq5O7Uvo99t5fnvweL9sPPXj3R6kmeB6ZrwxfI6vXTQfdchcu/VHnhqudO8uLjO79oWqWqfLx8drp6f+61keDk+cG7xzDpjkryS44x54UP/vs+PzUvnkeJzR/g81fErFusTkjc7mvWy2Lxyf9JzV+oZv62nxm6em+x5H3NdLwdDzQyS/rchJx3zxwybaZJ+c4vc/mWtLD5Zb+rY8V6h1F6a0vvn2SmrT70t7eXTx96b1a6V5H0P2xPk8a5YzLzNKNXtPk0c06rL/TycWnmOf9bHvU2xHz8aMjqkUvqxmN61QZ1ZnpfrA4qXLovK87Xme10uW2QWZPL1vv+uWjrfRnq8a5Rhz9uRHsk7ftmPJPFQnYuiy1WvkPJXn+cUxHavPnXmGyk3dOHzHxI8Np6cG/3vpxLu9fqfFZvyPJk/hKqaOemrsHhzLZbvS5tvB9On6Q54krfpOKrrO0qTbKLn+vKe5MiPx2ffGuXTzU/h8d9bPSU6HzLk0/L6oQtk/Z57f5Wdyqrm6vL16urq1mElJqLl5be+O5NqXdD7o7y92ndDxp7ZmXpFhwXP+F8Sz9vW9fN3k+F/KIrq+o0LZgRb4UqgPU68+iMlPV5PdzRs3Tz0uBzU9PRT1EtbwzW5so5E/6pTSX5dk8Sl7vI4XXaCHHwpH/y7ySxVt0Xu+Q0XH9N+9uv6OJZSPa0tfyU7P0MkHTaIPybvXKKWV38hQknoR4/poUX5fAJpfI5efU6H0oXzr9xGOx62XxM72n5roevdZQb/1N4czTy68ytHqpkkq
